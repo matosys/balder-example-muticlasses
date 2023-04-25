@@ -8,8 +8,30 @@ class ClassWithAValueFeature(balder.Feature):
         raise NotImplementedError()
 
 
-# and you need your expected value
-class GetExpectedAValue(balder.Feature):
+class ClassWithBValueFeature(balder.Feature):
+    def b_value(self):
+        raise NotImplementedError()
+
+
+class ClassWithCValueFeature(balder.Feature):
+    def c_value(self):
+        raise NotImplementedError()
+
+
+# we can also use a parent class for the similar features here
+class _GetExpectedValue(balder.Feature):
     @property
     def value(self):
         raise NotImplementedError()
+
+
+class GetExpectedAValue(_GetExpectedValue):
+    pass
+
+
+class GetExpectedBValue(_GetExpectedValue):
+    pass
+
+
+class GetExpectedCValue(_GetExpectedValue):
+    pass

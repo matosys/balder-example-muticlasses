@@ -22,9 +22,21 @@ class MyClass1ValueAFeature(features.ClassWithAValueFeature):
         return self.instance_feature.instance.a
 
 
+class MyClass1ValueCFeature(features.ClassWithCValueFeature):
+    instance_feature = MyClass1InstanceFeature()
+
+    @property
+    def c_value(self):
+        return self.instance_feature.instance.c
+
+
 # just describe the expected value
 class MyClass1ExpectedAVal(features.GetExpectedAValue):
     value = 1
+
+
+class MyClass1ExpectedCVal(features.GetExpectedCValue):
+    value = 3
 
 
 class SetupMyClass1(balder.Setup):
@@ -32,7 +44,9 @@ class SetupMyClass1(balder.Setup):
     class Client1(balder.Device):
         instance = MyClass1InstanceFeature()
         a_value = MyClass1ValueAFeature()
+        c_value = MyClass1ValueCFeature()
         a = MyClass1ExpectedAVal()
+        c = MyClass1ExpectedCVal()
 
     # this fixture will ensure that your instance is only created once (for ll scenarios that map to this setup)
     @balder.fixture('setup')
